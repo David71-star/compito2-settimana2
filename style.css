@@ -1,0 +1,83 @@
+nav{
+    margin-bottom: 5%;
+}
+body{
+    background-color: black;
+}
+#scatola1{
+    background: purple;
+background: linear-gradient(0deg, purple 10%, rgba(255,255,255,1) 100%);
+border: 1px solid whitesmoke;
+    margin-inline: 2.5%;
+    border-radius: 20px;
+    padding: 30px;
+    padding-top: 10px;
+    margin-bottom: 5%;
+    z-index: 2;
+    width: 30%;
+    height: max-content;
+}
+#scatola1 h3, #scatola1 h6{
+    text-align: end;
+    color: yellow;
+}
+#scatola2{
+    display: flex;
+    gap: 25px;
+    width: 70%
+}
+.card{
+    border-radius: 20px;
+    background: rgb(70,11,11);
+background: linear-gradient(0deg, rgba(70,11,11,1) 10%, rgba(255,255,255,1) 100%);
+border: 1px solid gray;
+}
+.card:hover{
+    scale: 105%;
+    transition: 0.3s;
+    transition-delay: 0.2s;
+    cursor: pointer;
+}
+.card img{
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: fill;
+    border-radius: 20px;
+}
+.card h5{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    color: white;
+}
+.card p{
+    color: white;
+}
+.card button{
+    border-radius: 30px;
+    border: none;
+    padding: 2.5%;
+    background-color: darkred;
+    color: white;
+    border: 1px solid white;
+}
+.card button:hover{
+    
+    background-color: white;
+    color: darkred;
+    border: 1px solid darkred;
+
+}
+.carrello{
+    box-shadow: 0px 0px 10px white!important;
+}
+.dettaglio img{
+    width: 25px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.dettaglio h5{
+    width: 40%;
+}
