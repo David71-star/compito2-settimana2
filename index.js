@@ -1,6 +1,5 @@
 let container = document.querySelector("#scatola2");
 let salva = document.querySelector("#salvaCarrello");
-let card = document.querySelector(".card");
 let rimuovi = document.querySelectorAll(".rimuovi");
 let totalespesa = document.querySelector("h3");
 let totalearticoli = document.querySelector("h6");
@@ -35,6 +34,12 @@ const generatorHTML = () => {
 generatorHTML();
 
 const salvaCarrello = function (id) {
+  let card = document.querySelectorAll(".card");
+  card.forEach((cards) => {
+    cards.addEventListener("click", () => {
+      cards.classList.toggle("carrello");
+    });
+  });
   fetch("https://striveschool-api.herokuapp.com/books")
     .then((res2) => {
       return res2.json();
