@@ -1,0 +1,6 @@
+img{
+    width: 25%;
+    aspect-ratio: 9/16;
+    object-fit: cover;
+    margin-right: 2%;
+}
