@@ -1,10 +1,11 @@
 let container = document.querySelector("#scatola2");
-let salva = document.querySelector("#salvaCarrello");
-let rimuovi = document.querySelectorAll(".rimuovi");
-let totalespesa = document.querySelector("h3");
-let totalearticoli = document.querySelector("h6");
-let totale = 0;
-let articoli = 0;
+let save = document.querySelector("#salvaCarrello");
+let remove = document.querySelectorAll(".rimuovi");
+let totalExpense = document.querySelector("h3");
+let totalItems = document.querySelector("h6");
+let cart2 = document.querySelector(".cart2");
+let total = 0;
+let items = 0;
 
 const generatorHTML = () => {
   fetch("https://striveschool-api.herokuapp.com/books")
@@ -20,26 +21,34 @@ const generatorHTML = () => {
         <div class="card-body">
           <h5 class="card-title">${book.title}</h5>
           <p class="card-text">${"Prezzo: €" + book.price}</p>
-          <button onclick="salvaCarrello(id)" id="${
+          <button class="add" onclick="saveCart(id)" id="${
             book.asin
-          }">${"Carrello"} </button>
-          <button onclick="nascondiCard(event)" class="rimuovi"> ${"Rimuovi"}</button>
+          }">${"Cart"} </button>
+          <button class="remove"> ${"remove"}</button>
+          <a href="/dettaglio.html?id=${book.asin}"> ${"Dettaglio"}</a>
         </div>
       </div>`;
         })
         .join("");
+      const removeCard = document.querySelectorAll(".remove");
+      removeCard.forEach((skip) =>
+        skip.addEventListener("click", nascondiCard)
+      );
+      const card = document.querySelectorAll(".add");
+      card.forEach((cards) => {
+        cards.addEventListener("click", selezionato);
+      });
     })
     .catch((err) => console.error(err));
 };
 generatorHTML();
 
-const salvaCarrello = function (id) {
-  let card = document.querySelectorAll(".card");
-  card.forEach((cards) => {
-    cards.addEventListener("click", () => {
-      cards.classList.toggle("carrello");
-    });
-  });
+function selezionato(event) {
+  console.log(event);
+  event.target.closest(".card").classList.toggle("carrello");
+}
+
+const saveCart = function (id) {
   fetch("https://striveschool-api.herokuapp.com/books")
     .then((res2) => {
       return res2.json();
@@ -48,11 +57,11 @@ const salvaCarrello = function (id) {
       data2
         .map((book2) => {
           if (id === book2.asin) {
-            totale += book2.price;
-            articoli += 1;
-            totalespesa.innerText = "Totale: " + totale + "€";
-            totalearticoli.innerText = "Totale articoli: " + articoli;
-            salva.innerHTML += `<div class="dettaglio d-flex justify-content-start align-items-center py-2">
+            total += book2.price;
+            items += 1;
+            totalExpense.innerText = "Totale: " + total + "€";
+            totalItems.innerText = "Totale articoli: " + items;
+            save.innerHTML += `<div class="dettaglio d-flex justify-content-start align-items-center py-2">
               <h5 class="mb-0">${book2.price} ${"€"}</h5>
               <div class="d-flex justify-content-start align-items-center">
               <img src="${book2.img}"/>
@@ -67,7 +76,7 @@ const salvaCarrello = function (id) {
     .catch((err) => console.error(err));
 };
 
-const cercaLibro = function () {
+const searchBook = function () {
   let input1 = document.querySelector("#cercaLibro2");
   container.innerHTML = "";
   fetch("https://striveschool-api.herokuapp.com/books")
@@ -88,10 +97,13 @@ const cercaLibro = function () {
                   <div class="card-body">
                     <h5 class="card-title">${book3.title}</h5>
                     <p class="card-text">${"Prezzo: €" + book3.price}</p>
-                    <button onclick="salvaCarrello(id)" class="carrello2" id="${
+                    <button class="add" onclick="saveCart(id)" id="${
                       book3.asin
-                    }">${"Carrello"} </button>
-                    <button onclick="nascondiCard(event)" class="rimuovi"> ${"Rimuovi"}</button>
+                    }">${"Cart"} </button>
+                    <button class="remove"> ${"remove"}</button>
+                    <a href="/dettaglio.html?id=${
+                      book3.asin
+                    }"> ${"Dettaglio"}</a>
                   </div>
                 </div>`;
           }
@@ -108,8 +120,8 @@ function nascondiCard(event) {
   }
 }
 
-const svuota = function () {
-  salva.innerHTML = "";
-  totale = 0;
-  articoli = 0;
+const empty = function () {
+  save.innerHTML = "";
+  total = 0;
+  items = 0;
 };
